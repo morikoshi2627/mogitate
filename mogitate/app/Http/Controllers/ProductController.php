@@ -3,55 +3,53 @@
 namespace App\Http\Controllers;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
-
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    // 一覧表示
+    // 一覧
     public function index()
     {
-    $products = Product::paginate(6); // ペジネーション
-    return view('products.index', compact('products'));
+        $products = Product::paginate(6);
+        return view('index', compact('products'));
     }
-
-    // 検索処理
+    
+    // 検索・並び替え（index.blade.phpで表示）
     public function search(Request $request)
-{
-    $keyword = $request->input('keyword');
-    $sort = $request->input('sort'); // 'asc' または 'desc'
-
-    $query = Product::query();
-
-    // 商品名の部分一致検索
-    if (!empty($keyword)) {
-        $query->where('name', 'like', "%{$keyword}%");
+    {
+        $keyword = $request->input('keyword');
+        $sort = $request->input('sort');
+    
+        $query = Product::query();
+    
+        if (!empty($keyword)) {
+            $query->where('name', 'like', '%' . $keyword . '%');
+        }
+    
+        if ($sort === 'asc') {
+            $query->orderBy('price', 'asc');
+        } elseif ($sort === 'desc') {
+            $query->orderBy('price', 'desc');
+        }
+    
+        $products = $query->paginate(6)->appends($request->all());
+    
+        $sortLabel = null;
+        if ($sort === 'asc') {
+            $sortLabel = '価格：低い順';
+        } elseif ($sort === 'desc') {
+            $sortLabel = '価格：高い順';
+        }
+    
+        return view('index', compact('products', 'keyword', 'sort', 'sortLabel'));
     }
-
-    // 並び替え処理
-    if ($sort === 'asc') {
-        $query->orderBy('price', 'asc');
-    } elseif ($sort === 'desc') {
-        $query->orderBy('price', 'desc');
-    }
-
-    $products = $query->paginate(10)->appends($request->all());
-
-    // 並び替え条件をBladeに渡すため
-    $sortLabel = null;
-    if ($sort === 'asc') {
-        $sortLabel = '価格：低い順';
-    } elseif ($sort === 'desc') {
-        $sortLabel = '価格：高い順';
-    }
-
-    return view('products.search', compact('products', 'keyword', 'sort', 'sortLabel'));
-}
 
     // 登録フォーム表示
     public function create()
     {
-        return view('products.create');
+        return view('create');
     }
 
     // 登録処理
@@ -62,7 +60,7 @@ class ProductController extends Controller
         Product::create([
             'name' => $request->name,
             'price' => $request->price,
-            'season' => $request->season,
+            'season' => implode(',', $request->season),
             'description' => $request->description,
             'image' => $path,
         ]);
@@ -74,7 +72,7 @@ class ProductController extends Controller
     public function show($productId)
     {
         $product = Product::findOrFail($productId);
-        return view('products.show', compact('product')); // Blade内に編集フォームを含める
+        return view('show', compact('product')); // Blade内に編集フォームを含める
     }
     // 詳細画面の更新処理
     public function update(UpdateProductRequest $request, $productId)
@@ -90,7 +88,7 @@ class ProductController extends Controller
     $product->update([
         'name' => $request->name,
         'price' => $request->price,
-        'season' => $request->season,
+        'season' => implode(',', $request->season),
         'description' => $request->description,
         ]);
 
@@ -100,8 +98,13 @@ class ProductController extends Controller
     // 削除処理
     public function destroy($productId)
     {
-    $product = Product::findOrFail($productId);
-    $product->delete();
-    return redirect()->route('products.index');
+        $product = Product::findOrFail($productId);
+        // 画像ファイルの削除
+        if ($product->image && Storage::disk('public')->exists($product->image)) {
+            Storage::disk('public')->delete($product->image);
+        }
+
+        $product->delete();
+        return redirect()->route('products.index');
     }
 }
