@@ -6,6 +6,7 @@ use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Season;
 
 class ProductController extends Controller
 {
@@ -38,9 +39,9 @@ class ProductController extends Controller
     
         $sortLabel = null;
         if ($sort === 'asc') {
-            $sortLabel = '価格：低い順';
+            $sortLabel = '低い順に表示';
         } elseif ($sort === 'desc') {
-            $sortLabel = '価格：高い順';
+            $sortLabel = '高い順に表示';
         }
     
         return view('index', compact('products', 'keyword', 'sort', 'sortLabel'));
@@ -71,18 +72,25 @@ class ProductController extends Controller
     // 詳細画面
     public function show($productId)
     {
-        $product = Product::findOrFail($productId);
-        return view('show', compact('product')); // Blade内に編集フォームを含める
+        $product = Product::with('seasons')->findOrFail($productId);
+        $seasons = Season::all();
+        return view('show', compact('product', 'seasons'));  // Blade内に編集フォームを含める
     }
     // 詳細画面の更新処理
     public function update(UpdateProductRequest $request, $productId)
     {
     $product = Product::findOrFail($productId);
 
+    $product->seasons()->sync($request->season);
 
     if ($request->hasFile('image')) {
+        // 古い画像を削除
+        if ($product->image && \Storage::disk('public')->exists($product->image)) {
+            \Storage::disk('public')->delete($product->image);
+        }
+        // 新しい画像を保存
         $path = $request->file('image')->store('images', 'public');
-        $product->image = $path; // 画像保存処理
+        $product->image = $path;
         }
 
     $product->update([

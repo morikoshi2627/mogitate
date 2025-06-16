@@ -9,3 +9,170 @@
   font-size: 30px;
   color: #f5c700;
 }
+
+.show-page{
+  background: #f8f8f8;
+  padding: 40px;
+}
+
+.show-page-inner{
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+.show-page-header{
+  font-size: 10px;
+  color: #4b4b4b;
+}
+
+.back-to-index{
+  font-size: 15px;
+  margin-bottom: 30px;
+  text-decoration: none;
+  color: skyblue;
+}
+
+.show-content{
+  display: flex;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.show-image-preview {
+  width: 250px;
+  height: auto;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+/* 商品画像 */
+.show-image{
+  width: 250px;
+  height: auto;
+}
+
+.image-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.show-details{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.show-product-name{
+color: #4b4b4b;
+}
+
+.show-product-name-area,
+.show-price-area {
+  padding: 8px;
+  font-size: 16px;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.show-price{
+  color: #4b4b4b;
+}
+
+/* 季節 */
+.show-seasons{
+  margin-right: 10px;
+  color: #4b4b4b;
+}
+
+.season-checkboxes{
+  color: #4b4b4b;
+}
+/* 丸いチェックボックスのベーススタイル */
+.checbox-type{
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
+  position: relative;
+  margin-right: 5px;
+}
+/* チェックされたときのスタイル */
+.checbox-type:checked{
+  background-color: #4b4b4b;
+  border-color: #4b4b4b;
+}
+/* チェックマーク（✓）を白で中央に表示 */
+.checbox-type:checked::after {
+  content: '✓';
+  color: white;
+  font-size: 14px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -55%);
+  font-weight: bold;
+}
+
+.show-description{
+  width: 100%;
+  margin-bottom: 20px;
+  color: #4b4b4b;
+}
+
+.show-description-area{
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  font-size: 16px;
+  box-sizing: border-box;
+  color: #4b4b4b;
+  }
+
+.button-area {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.change-button,
+.back-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.change-button {
+  background-color: #f5c700;
+  color: black;
+}
+
+.back-button {
+  background-color: #ddd;
+  color: #333; }
+
+  /* 削除ボタン */
+.trash-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.delete-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  
+}

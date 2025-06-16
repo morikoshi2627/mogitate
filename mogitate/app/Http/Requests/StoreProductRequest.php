@@ -32,7 +32,7 @@ class StoreProductRequest extends FormRequest
                 'season.*' => 'in:春,夏,秋,冬',
                 'description' => 'required|string|max:120',
                 'image' => 'required|file|mimes:jpeg,png',
-            ];
+        ];
     }
     public function messages()
     {

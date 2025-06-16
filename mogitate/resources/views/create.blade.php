@@ -19,63 +19,91 @@
 
   <main>
     <div class="create-page">
-        <div class="create-page-header">
+      <div class="create-page-inner">  
+         <div class="create-page-header">
             <h2>商品登録</h2>
-        </div>
+         </div>
             <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-
-                <label>商品名:</label>
-                <input type="text" name="name" value="{{ old('name') }}">
+              <div class="form-group">
+                 <div class="form-labels">
+                  <label>商品名</label>
+                  <label class="required">必須</label>
+                 </div>
+                 <input class="product-name-area" type="text" name="name" placeholder="商品名を入力" value="{{ old('name') }}">
                 @error('name')
-                    <div style="color: red;">{{ $message }}</div>
+                  <div class="error">{{ $message }}</div>
                 @enderror
+              </div>
 
-                <label>値段:</label>
-                    <input type="number" name="price" value="{{ old('price') }}">
+              <div class="form-group">
+                  <div class="form-labels">
+                    <label>値段</label>
+                    <label class="required">必須</label>
+                  </div>
+                  <input class="price-area" type="number" name="price" placeholder="値段を入力" value="{{ old('price') }}">
                 @error('price')
-                    <div style="color: red;">{{ $message }}</div>
+                  <div class="error">{{ $message }}</div>
                 @enderror
+               </div>
 
-                <label>季節:</label>
-                @php
+              <div class="form-group">
+                  <div class="form-labels">
+                    <label>商品画像</label>
+                    <label class="required">必須</label>
+                  </div>
+                  <input class="image-area" type="file" name="image">
+                @error('image')
+                  <div class="error">{{ $message }}</div>
+                @enderror
+              </div>
+
+              <div class="form-group">
+                <div class="form-labels">
+                    <label>季節</label>
+                    <label class="required">必須</label>
+                    <label class="selection-label">複数選択可</label>
+                </div>
+                <div class="season-checkboxes">
+                 @php
                     $seasons = ['春', '夏', '秋', '冬'];
                     $selectedSeasons = old('season', []);
-                @endphp
-
-                @foreach($seasons as $season)
-                    <label>
-                        <input
+                 @endphp
+                 @foreach($seasons as $season)
+                    <label class="checkbox-label">
+                        <input class="checkbox-label-input"
                             type="checkbox"
                             name="season[]"
                             value="{{ $season }}"
                             {{ in_array($season, $selectedSeasons) ? 'checked' : '' }}
                         >
+                        <span class="custom-checkbox"></span>
                         {{ $season }}
                     </label>
-                @endforeach
-
+                 @endforeach
+                </div>
                 @error('season')
-                    <div style="color: red;">{{ $message }}</div>
+                  <div class="error">{{ $message }}</div>
                 @enderror
+              </div>
 
-                <label>商品説明:</label>
-                     <textarea name="description">{{ old('description') }}</textarea>
-                @error('description')
-                    <div style="color: red;">{{ $message }}</div>
-                @enderror
+              <div class="form-group">
+                  <div class="form-labels">
+                    <label>商品説明</label>
+                    <label class="required">必須</label>
+                  </div>
+                  <textarea class="description-area"  name="description" placeholder="商品の説明を入力">{{ old('description') }}</textarea>
+                 @error('description')
+                   <div class="error">{{ $message }}</div>
+                 @enderror
+              </div>
 
-                <label>商品画像:</label>
-                    <input type="file" name="image">
-                @error('image')
-                    <div style="color: red;">{{ $message }}</div>
-                @enderror
-
-                <button type="submit">登録</button>
+              <div class="button-area">
                 <a class="back-button" href="{{ route('products.index') }}">戻る</a>
+                <button class="register-button" type="submit">登録</button>
+              </div>
             </form>
-
-
+      </div>
     </div>
   </main>
 </body>
