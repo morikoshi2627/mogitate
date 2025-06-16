@@ -1,0 +1,11 @@
+.header {
+  background-color: white;
+  padding: 10px 30px;
+}
+
+.header-logo {
+  text-decoration: none;
+  font-family: cursive;
+  font-size: 30px;
+  color: #f5c700;
+}

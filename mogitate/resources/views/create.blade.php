@@ -1,23 +1,12 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>mogitate</title>
-  <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}" />
+@extends('layouts.app')
+
+@section('css')
   <link rel="stylesheet" href="{{ asset('css/create.css') }}" />
 
-</head>
+@endsection
 
-<body>
-    <header class="header">
-        <div class="header-logo">
-            mogitate
-        </div>
-    </header>
+@section('content')
 
-  <main>
     <div class="create-page">
       <div class="create-page-inner">  
          <div class="create-page-header">
@@ -104,6 +93,4 @@
             </form>
       </div>
     </div>
-  </main>
-</body>
-</html>
+@endsection

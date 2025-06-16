@@ -1,23 +1,13 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>mogitate</title>
-  <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}" />
+@extends('layouts.app')
+
+@section('css')
   <link rel="stylesheet" href="{{ asset('css/index.css') }}" />
 
-</head>
+@endsection
 
-<body>
-    <header class="header">
-        <div class="header-logo">
-            mogitate
-        </div>
-    </header>
 
-  <main>
+@section('content')
+
     <div class="product-page">
          <div class="product-page-header">
             @if(request('keyword'))
@@ -39,8 +29,6 @@
                 <option value="asc" {{ request('sort') == 'asc' ? 'selected' : '' }}>低い順に表示</option>
                 <option value="desc" {{ request('sort') == 'desc' ? 'selected' : '' }}>高い順に表示</option>
              </select>
-        
-
           <!-- タグ表示とリセットボタン -->
             @if($sortLabel ?? false)
               <div class="sort-tag">
@@ -49,7 +37,6 @@
               </div>
             @endif
           </form>
-
           <!-- 商品表示 -->
               <div class="product-grid">
                 @foreach($products as $product)
@@ -76,9 +63,5 @@
                 @endif
               @endforeach
             </div>
-
-      
     </div>
-  </main>
-</body>
-</html>
+@endsection
