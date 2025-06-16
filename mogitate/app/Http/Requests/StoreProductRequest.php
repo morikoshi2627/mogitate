@@ -29,7 +29,7 @@ class StoreProductRequest extends FormRequest
                 'name' => 'required|string',
                 'price' => 'required|numeric|between:0,10000',
                 'season' => 'required|array',
-                'season.*' => 'in:春,夏,秋,冬',
+                'season.*' => 'exists:seasons,id',
                 'description' => 'required|string|max:120',
                 'image' => 'required|file|mimes:jpeg,png',
         ];
@@ -42,7 +42,7 @@ class StoreProductRequest extends FormRequest
             'price.numeric' => '数値で入力してください',
             'price.between' => '0~10000円以内で入力してください',
             'season.required' => '季節を選択してください',
-            'season.*.in' => '季節は「春」「夏」「秋」「冬」から選択してください',
+            'season.*.exists' => '季節は「春」「夏」「秋」「冬」から選択してください',
             'description.required' => '商品説明を入力してください',
             'description.max' => '120文字以内で入力してください',
             'image.required' => '商品画像を登録してください',

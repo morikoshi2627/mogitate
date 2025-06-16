@@ -163,10 +163,15 @@ color: #4b4b4b;
   color: #333; }
 
   /* 削除ボタン */
+.delete-button-area{
+  text-align: right;
+}
+
 .trash-icon {
   width: 20px;
   height: 20px;
   object-fit: contain;
+
 }
 
 .delete-button {
@@ -174,5 +179,4 @@ color: #4b4b4b;
   border: none;
   cursor: pointer;
   padding: 0;
-  
 }

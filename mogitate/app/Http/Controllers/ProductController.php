@@ -50,7 +50,9 @@ class ProductController extends Controller
     // 登録フォーム表示
     public function create()
     {
-        return view('create');
+        // seasons テーブルの全件取得（id, name）
+        $seasons = Season::all(); 
+        return view('create', compact('seasons'));
     }
 
     // 登録処理
@@ -58,13 +60,14 @@ class ProductController extends Controller
     {
         $path = $request->file('image')->store('images', 'public');
 
-        Product::create([
+        $product = Product::create([
             'name' => $request->name,
             'price' => $request->price,
-            'season' => implode(',', $request->season),
             'description' => $request->description,
             'image' => $path,
         ]);
+        // 選ばれた季節を中間テーブルに保存
+        $product->seasons()->attach($request->season);
 
         return redirect()->route('products.index');
     }
@@ -93,12 +96,10 @@ class ProductController extends Controller
         $product->image = $path;
         }
 
-    $product->update([
-        'name' => $request->name,
-        'price' => $request->price,
-        'season' => implode(',', $request->season),
-        'description' => $request->description,
-        ]);
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->description = $request->description;
+        $product->save();
 
     return redirect()->route('products.show', $productId);
     }

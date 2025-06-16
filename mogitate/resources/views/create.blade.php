@@ -66,7 +66,6 @@
                 </div>
                 <div class="season-checkboxes">
                  @php
-                    $seasons = ['春', '夏', '秋', '冬'];
                     $selectedSeasons = old('season', []);
                  @endphp
                  @foreach($seasons as $season)
@@ -74,11 +73,11 @@
                         <input class="checkbox-label-input"
                             type="checkbox"
                             name="season[]"
-                            value="{{ $season }}"
-                            {{ in_array($season, $selectedSeasons) ? 'checked' : '' }}
+                            value="{{ $season->id }}"
+                            {{ in_array($season->id, $selectedSeasons) ? 'checked' : '' }}
                         >
                         <span class="custom-checkbox"></span>
-                        {{ $season }}
+                        {{ $season->name }}
                     </label>
                  @endforeach
                 </div>

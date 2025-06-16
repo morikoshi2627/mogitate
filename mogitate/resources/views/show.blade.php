@@ -59,7 +59,7 @@
             <div class="season-checkboxes">
               @foreach($seasons as $season)
                 <label>
-                  <input class="checbox-type" type="checkbox" name="season[]" value="value="{{ $season->id }}" {{ in_array($season->id, $selectedSeasons) ? 'checked' : '' }}
+                  <input class="checbox-type" type="checkbox" name="season[]" value="{{ $season->id }}" {{ in_array($season->id, $selectedSeasons) ? 'checked' : '' }}
                   >
                   {{ $season->name }}
                 </label>
@@ -80,15 +80,15 @@
           <div class="button-area">
             <a class="back-button" href="{{ route('products.index') }}">戻る</a>
             <button class="change-button" type="submit">変更を保存</button>
-            <!-- 削除ボタン -->
-            <form method="POST" action="{{ route('products.destroy', $product->id) }}" onsubmit="return confirm('本当に削除しますか？');">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="delete-button">
-                <img class="trash-icon" src="{{ asset('storage/images/Vector.png') }}" alt="削除">
-                </button>
-            </form>
           </div>
+        </form>
+        <!-- 削除ボタン -->
+        <form class="delete-button-area"method="POST" action="{{ route('products.destroy', $product->id) }}" onsubmit="return confirm('本当に削除しますか？');">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="delete-button">
+            <img class="trash-icon" src="{{ asset('storage/images/Vector.png') }}" alt="削除">
+            </button>
         </form>
       </div>
     </div>
