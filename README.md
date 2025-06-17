@@ -16,15 +16,15 @@
 2. cp .env.example .env
 3. php artisan key:generate
 4. .env の DB 設定を以下のように修正  
-   　 ```env  
-   　 APP_URL=http://localhost:8081
-   ```env
-   DB_CONNECTION=mysql
-   DB_HOST=mysql
-   DB_PORT=3306
-   DB_DATABASE=mogitate_db
-   DB_USERNAME=mogitate_user
-   DB_PASSWORD=mogitate_pass
+
+   APP_URL=http://localhost:8081  
+
+   DB_CONNECTION=mysql  
+   DB_HOST=mysql  
+   DB_PORT=3306  
+   DB_DATABASE=mogitate_db  
+   DB_USERNAME=mogitate_user  
+   DB_PASSWORD=mogitate_pass  
    ```
 5. php artisan migrate --seed
 
