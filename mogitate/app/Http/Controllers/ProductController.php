@@ -101,7 +101,7 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->save();
 
-    return redirect()->route('products.show', $productId);
+    return redirect()->route('products.index', $productId);
     }
 
     // 削除処理
