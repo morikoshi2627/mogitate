@@ -28,6 +28,14 @@
    ```
 5. php artisan migrate --seed
 
+### 画像取り扱いについて
+
+- 画像は `storage/app/public/images` に保存されています。
+- 画像をブラウザからアクセスするために、以下のコマンドを実行してください。  
+
+php artisan storage:link
+
+
 ### アプリ確認用 URL
 
 - アプリ URL: http://localhost:8081/products/
