@@ -54,7 +54,7 @@
   font-size: 20px;
   border: none;
   cursor: pointer;
- }
+}
 
 .select-title{
   font-size: 25px;
@@ -70,7 +70,6 @@
   color: gray;
   cursor: pointer;
 }
-
 
 /* リセットボタン”×” */
 .sort-tag {
@@ -91,17 +90,17 @@
 
 .sort-tag-a {
   display: inline-block;
-    width: 30px;
-    height: 30px;
-    border: 1px solid #f5c700;
-    color: #f5c700;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 25px;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 15px;
-    transition: background-color 0.2s ease;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #f5c700;
+  color: #f5c700;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 25px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 15px;
+  transition: background-color 0.2s ease;
 }
 
 .sort-tag-a:hover {

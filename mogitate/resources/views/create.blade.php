@@ -8,7 +8,7 @@
 @section('content')
 
     <div class="create-page">
-      <div class="create-page-inner">  
+      <div class="create-page-inner">
          <div class="create-page-header">
             <h2>商品登録</h2>
          </div>

@@ -1,6 +1,7 @@
 .show-page{
   background: #f8f8f8;
   padding: 40px;
+  height: 800px
 }
 
 .show-page-inner{
@@ -53,8 +54,9 @@
   flex-direction: column;
   gap: 15px;
 }
+
 .show-product-name{
-color: #4b4b4b;
+  color: #4b4b4b;
 }
 
 .show-product-name-area,
@@ -79,6 +81,7 @@ color: #4b4b4b;
 .season-checkboxes{
   color: #4b4b4b;
 }
+
 /* 丸いチェックボックスのベーススタイル */
 .checbox-type{
   appearance: none;
@@ -92,11 +95,13 @@ color: #4b4b4b;
   position: relative;
   margin-right: 5px;
 }
+
 /* チェックされたときのスタイル */
 .checbox-type:checked{
   background-color: #4b4b4b;
   border-color: #4b4b4b;
 }
+
 /* チェックマーク（✓）を白で中央に表示 */
 .checbox-type:checked::after {
   content: '✓';
@@ -153,6 +158,8 @@ color: #4b4b4b;
   /* 削除ボタン */
 .delete-button-area{
   text-align: right;
+  margin-left: 30px;
+  margin-top: 10px;
 }
 
 .trash-icon {
